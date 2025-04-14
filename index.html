@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلاسی - ورود / ثبت نام</title>
+    <!-- Bootstrap 5 RTL CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <style>
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+        }
+        body {
+            font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+            background-color: #f8f3e6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .auth-container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: 2rem auto;
+        }
+        .auth-image {
+            background-image: linear-gradient(to bottom right, rgb(209, 213, 219) 0%, #d4af37 85%);
+            background-size: cover;
+            background-position: center;
+            min-height: 600px;
+        }
+        .auth-forms {
+            padding: 2rem;
+        }
+        .logo {
+            max-width: 120px;
+            margin-bottom: 2rem;
+        }
+        .phone-icon {
+            width: 120px;
+            margin-bottom: 2rem;
+        }
+        .form-control {
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            font-size: 1.1rem;
+        }
+        .btn-continue {
+            background-color: #d4af37;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .btn-continue:hover {
+            background-color: #c4a030;
+        }
+        .slide {
+            display: none;
+        }
+        .slide.active {
+            display: block;
+        }
+        .terms {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 1rem;
+        }
+        .terms a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+        .invalid-feedback {
+            font-size: 0.875rem;
+            color: #dc3545;
+        }
+        @media (max-width: 768px) {
+            .auth-image {
+                display: none !important;
+            }
+            .col-md-6 {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="auth-container">
+            <div class="row g-0">
+             
+                
+                <!-- Forms Section -->
+                <div class="col-md-6">
+                    <div class="auth-forms">
+                        <div class="text-start">
+                            <img src="logo.svg"  width="300px" height="100" alt="طلاسی" class="logo">
+                        </div>
+                        
+                        <!-- Phone Number Slide -->
+                        <div class="slide active" id="phoneSlide">
+                            <div class="text-center">
+                              
+                                <h2 class="h4 mb-4 text-start">ورود / ثبت نام</h2>
+                            </div>
+                            <form id="phoneForm">
+                                <div class="mb-3">
+                                    <p class="text-start mb-2">شماره موبایلی که به نام خودتان است را وارد کنید.</p>
+                                    <input type="tel" class="form-control text-center" id="phoneNumber" 
+                                           placeholder="شماره موبایل خود را وارد کنید"
+                                           maxlength="11">
+                                    <div class="invalid-feedback text-center">
+                                        لطفا شماره موبایل معتبر وارد کنید
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-continue">
+                                    ادامه
+                                </button>
+                                <p class="terms text-center">
+                                    ورود شما به منزله قبول <a href="#">قوانین و مقررات</a> طلاسی می‌باشد.
+                                </p>
+                            </form>
+                        </div>
+
+                        <!-- OTP Verification Slide -->
+                        <div class="slide" id="otpSlide">
+                            <div class="text-center">
+                                <img src="https://raw.githubusercontent.com/your-repo/otp-icon.png" alt="تایید کد" class="phone-icon">
+                                <h2 class="h4 mb-4">کد تایید را وارد کنید</h2>
+                                <p class="text-muted mb-4">کد تایید برای شماره <span id="userPhone" class="fw-bold"></span> ارسال شد</p>
+                            </div>
+                            <form id="otpForm">
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <input type="text" class="form-control text-center" maxlength="1" inputmode="numeric" pattern="[0-9]" required>
+                                        <input type="text" class="form-control text-center" maxlength="1" inputmode="numeric" pattern="[0-9]" required>
+                                        <input type="text" class="form-control text-center" maxlength="1" inputmode="numeric" pattern="[0-9]" required>
+                                        <input type="text" class="form-control text-center" maxlength="1" inputmode="numeric" pattern="[0-9]" required>
+                                        <input type="text" class="form-control text-center" maxlength="1" inputmode="numeric" pattern="[0-9]" required>
+                                    </div>
+                                    <div class="invalid-feedback text-center">
+                                        کد تایید نامعتبر است
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-continue">
+                                    تایید
+                                </button>
+                                <div class="text-center mt-3">
+                                    <div id="timer" class="text-muted mb-2">
+                                        ارسال مجدد کد تا <span id="countdown">02:00</span>
+                                    </div>
+                                    <button type="button" id="resendCode" class="btn btn-link text-decoration-none" style="color: #d4af37;" disabled>
+                                        ارسال مجدد کد
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                   <!-- Fixed Image Section -->
+                   <div class="col-md-6">
+                    <div class="auth-image d-flex justify-content-center align-items-center">
+                      <img src="login1.webp" width="400px" height="400px" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
